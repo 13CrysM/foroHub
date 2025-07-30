@@ -31,4 +31,17 @@ public class Topico {
         this.fecha_creacion = datosRegistroTopico.fecha_creacion();
         this.activo = datosRegistroTopico.activo();
     }
+
+    public void desactivarTopico() {
+        this.activo = false;
+    }
+
+    public void actualizarDatos(DatosActualizarTopico datosActualizarTopico) {
+        if (datosActualizarTopico.titulo() != null) {
+            this.titulo = datosActualizarTopico.titulo();
+        }
+        if (datosActualizarTopico.mensaje() != null) {
+            this.mensaje = datosActualizarTopico.mensaje();
+        }
+    }
 }
