@@ -1,6 +1,9 @@
 package cjmp.desafio.foroHub.controller;
 
+import cjmp.desafio.foroHub.domain.respuestas.DatosRegistroRespuesta;
 import cjmp.desafio.foroHub.domain.topico.*;
+import cjmp.desafio.foroHub.domain.usuario.Usuario;
+import cjmp.desafio.foroHub.domain.usuario.UsuarioRepository;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +23,9 @@ public class TopicoController {
 
     @Autowired
     private TopicoRepository topicoRepository;
+
+    @Autowired
+    private UsuarioRepository usuarioRepository;
 
     @PostMapping
     public ResponseEntity<DatosRespuestaTopico> registrarTopico(@RequestBody @Valid DatosRegistroTopico datosRegistroTopico, UriComponentsBuilder uriComponentsBuilder) {
@@ -50,4 +56,16 @@ public class TopicoController {
         return ResponseEntity.noContent().build();
 
     }
+
+    @PostMapping("/respuesta")
+    @Transactional
+    public ResponseEntity<String> registrarRespuesta(@RequestBody @Valid DatosRegistroRespuesta datos) {
+        Topico topico = topicoRepository.getReferenceById(datos.topico_id());
+        Usuario autor = usuarioRepository.getReferenceById(datos.usuario_id());
+
+        topico.agregarRespuesta(datos, autor);
+
+        return ResponseEntity.ok("Respuesta registrada correctamente.");
+    }
+
 }
