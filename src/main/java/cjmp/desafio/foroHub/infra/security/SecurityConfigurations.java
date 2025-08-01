@@ -24,10 +24,35 @@ public class SecurityConfigurations {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         return httpSecurity.csrf(csrf ->csrf.disable())
-                .sessionManagement(sm ->sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests((authorizeHttpRequest) ->
-                        authorizeHttpRequest.requestMatchers(HttpMethod.POST,"/login").permitAll()
+                        authorizeHttpRequest
+                                .requestMatchers(HttpMethod.POST,"/login").permitAll()
+                                .requestMatchers(HttpMethod.GET,"/usuarios").permitAll()
+                                .requestMatchers(HttpMethod.GET,"/perfiles").permitAll()
+                                .requestMatchers(HttpMethod.GET,"/topicos").permitAll()
                                 .requestMatchers("/v3/api-docs/**", "swagger-ui.html", "swagger-ui/**").permitAll()
+
+//                                .requestMatchers(HttpMethod.GET, "/usuarios/**").hasAnyRole("ADMIN", "USUARIO","INVITADO")
+//                                .requestMatchers(HttpMethod.POST, "/usuarios/**").hasRole("ADMIN")
+//                                .requestMatchers(HttpMethod.PUT, "/usuarios/**").hasAnyRole("ADMIN","USUARIO")
+//                                .requestMatchers(HttpMethod.DELETE, "/usuarios/**").hasRole("ADMIN")
+//
+//                                .requestMatchers(HttpMethod.GET, "/perfiles/**").hasAnyRole("ADMIN", "USUARIO","INVITADO")
+//                                .requestMatchers(HttpMethod.POST, "/perfiles/**").hasRole("ADMIN")
+//                                .requestMatchers(HttpMethod.PUT, "/perfiles/**").hasAnyRole("ADMIN","USUARIO")
+//                                .requestMatchers(HttpMethod.DELETE, "/perfiles/**").hasRole("ADMIN")
+//
+//                                .requestMatchers(HttpMethod.GET, "/topicos/**").hasAnyRole("ADMIN", "USUARIO","INVITADO")
+//                                .requestMatchers(HttpMethod.POST, "/topicos/**").hasRole("ADMIN")
+//                                .requestMatchers(HttpMethod.PUT, "/topicos/**").hasAnyRole("ADMIN","USUARIO")
+//                                .requestMatchers(HttpMethod.DELETE, "/topicos/**").hasRole("ADMIN")
+//
+//                                .requestMatchers(HttpMethod.GET, "/respuestas/**").hasAnyRole("ADMIN", "USUARIO","INVITADO")
+//                                .requestMatchers(HttpMethod.POST, "/respuestas/**").hasRole("ADMIN")
+//                                .requestMatchers(HttpMethod.PUT, "/respuestas/**").hasAnyRole("ADMIN","USUARIO")
+//                                .requestMatchers(HttpMethod.DELETE, "/respuestas/**").hasRole("ADMIN")
+
                                 .anyRequest()
                                 .authenticated()
                 )
@@ -46,3 +71,46 @@ public class SecurityConfigurations {
         return new BCryptPasswordEncoder();
     }
 }
+/*
+@Bean
+public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
+    return httpSecurity
+        .csrf(csrf -> csrf.disable())
+        .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+        .authorizeHttpRequests(auth -> auth
+            // Público
+            .requestMatchers(HttpMethod.POST, "/login").permitAll()
+            .requestMatchers("/v3/api-docs/**", "swagger-ui.html", "swagger-ui/**").permitAll()
+
+            // Controlador: UsuariosController
+            .requestMatchers(HttpMethod.GET, "/usuarios/**").hasAnyRole("ADMIN", "MODERADOR")
+            .requestMatchers(HttpMethod.POST, "/usuarios/**").hasRole("ADMIN")
+            .requestMatchers(HttpMethod.PUT, "/usuarios/**").hasRole("ADMIN")
+            .requestMatchers(HttpMethod.DELETE, "/usuarios/**").hasRole("ADMIN")
+
+            // Controlador: PerfilesController
+            .requestMatchers(HttpMethod.GET, "/perfiles/**").hasAnyRole("ADMIN", "MODERADOR")
+            .requestMatchers(HttpMethod.POST, "/perfiles/**").hasRole("ADMIN")
+            .requestMatchers(HttpMethod.PUT, "/perfiles/**").hasRole("ADMIN")
+            .requestMatchers(HttpMethod.DELETE, "/perfiles/**").hasRole("ADMIN")
+
+            // Controlador: TemasController
+            .requestMatchers(HttpMethod.GET, "/temas/**").permitAll()
+            .requestMatchers(HttpMethod.POST, "/temas/**").hasAnyRole("USER", "MODERADOR", "ADMIN")
+            .requestMatchers(HttpMethod.PUT, "/temas/**").hasAnyRole("MODERADOR", "ADMIN")
+            .requestMatchers(HttpMethod.DELETE, "/temas/**").hasAnyRole("MODERADOR", "ADMIN")
+
+            // Controlador: ComentariosController
+            .requestMatchers(HttpMethod.GET, "/comentarios/**").permitAll()
+            .requestMatchers(HttpMethod.POST, "/comentarios/**").hasAnyRole("USER", "MODERADOR", "ADMIN")
+            .requestMatchers(HttpMethod.PUT, "/comentarios/**").hasAnyRole("MODERADOR", "ADMIN")
+            .requestMatchers(HttpMethod.DELETE, "/comentarios/**").hasAnyRole("MODERADOR", "ADMIN")
+
+            // Todo lo demás requiere autenticación
+            .anyRequest().authenticated()
+        )
+        .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
+        .build();
+}
+
+*/

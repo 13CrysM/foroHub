@@ -29,14 +29,18 @@ public class PerfilController {
     @Transactional
     public ResponseEntity<DatosPerfil> registrarPerfil(@RequestBody @Valid DatosPerfil datos) {
         Perfil perfil = new Perfil();
-        perfil.setNombre_perfil(datos.nombre());
+        perfil.setNombre(datos.nombre());
         perfilRepository.save(perfil);
         return ResponseEntity.ok(new DatosPerfil(perfil));
     }
     //GET
     @GetMapping
-    public ResponseEntity<Page<DatosListadoPerfil>> listarPerfiles(@PageableDefault(size = 10, sort = "nombre") Pageable paginacion) {
-        return ResponseEntity.ok(perfilRepository.findAll(paginacion).map(DatosListadoPerfil::new));
+    public ResponseEntity<Page<DatosListadoPerfil>> listarPerfiles(
+            @PageableDefault(size = 10) Pageable paginacion) {
+
+        return ResponseEntity.ok(perfilRepository
+                .findAll(paginacion)
+                .map(DatosListadoPerfil::new));
     }
     //PUT
     //DELETE

@@ -18,7 +18,8 @@ public class Perfil {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    private String nombre_perfil;
+    @Column(name = "nombre_perfil")
+    private String nombre;
 //    @ManyToMany(mappedBy = "perfiles")
 //    private Set<Usuario> usuarios = new HashSet<>();
     @OneToMany
@@ -26,6 +27,6 @@ public class Perfil {
 
     public Perfil (DatosPerfil datosPerfil) {
         this.id = datosPerfil.id();
-        this.nombre_perfil = datosPerfil.nombre();
+        this.nombre = datosPerfil.nombre();
     }
 }
