@@ -8,6 +8,7 @@ import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Table(name = "respuestas")
 @Entity(name = "Respuesta")
@@ -26,7 +27,7 @@ public class Respuesta {
     @JoinColumn(name = "topico_id")
     private Topico topico;
 
-    private LocalDate fecha_creacion;
+    private LocalDateTime fechaCreacion;
 
     @ManyToOne
     @JoinColumn(name = "usuario_id")

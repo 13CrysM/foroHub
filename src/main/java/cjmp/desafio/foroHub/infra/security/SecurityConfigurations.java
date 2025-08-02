@@ -31,6 +31,7 @@ public class SecurityConfigurations {
                                 .requestMatchers(HttpMethod.GET,"/usuarios").permitAll()
                                 .requestMatchers(HttpMethod.GET,"/perfiles").permitAll()
                                 .requestMatchers(HttpMethod.GET,"/topicos").permitAll()
+                                .requestMatchers(HttpMethod.POST, "/cursos").permitAll()
                                 .requestMatchers("/v3/api-docs/**", "swagger-ui.html", "swagger-ui/**").permitAll()
 
 //                                .requestMatchers(HttpMethod.GET, "/usuarios/**").hasAnyRole("ADMIN", "USUARIO","INVITADO")

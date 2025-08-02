@@ -9,6 +9,8 @@ import jakarta.validation.Valid;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.util.List;
 
 @Table(name = "topicos")
@@ -23,7 +25,8 @@ public class Topico {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String titulo;
-    private LocalDate fecha_creacion;
+    @Column(name = "fecha_creacion")
+    private LocalDateTime fechaCreacion;
     private Boolean activo;
 
     private String mensaje;
@@ -43,7 +46,7 @@ public class Topico {
     public Topico(@Valid DatosRegistroTopico datosRegistroTopico) {
         this.titulo = datosRegistroTopico.titulo();
         this.mensaje = datosRegistroTopico.mensaje();
-        this.fecha_creacion = datosRegistroTopico.fecha_creacion();
+        this.fechaCreacion = datosRegistroTopico.fechaCreacion();
         this.activo = datosRegistroTopico.activo();
     }
 
@@ -63,7 +66,7 @@ public class Topico {
     public void agregarRespuesta(DatosRegistroRespuesta datos, Usuario autor) {
         Respuesta respuesta = new Respuesta();
         respuesta.setMensaje(datos.mensaje());
-        respuesta.setFecha_creacion(LocalDate.now());
+        respuesta.setFechaCreacion(LocalDateTime.now());
         respuesta.setUsuario(autor);
         respuesta.setTopico(this);
 
