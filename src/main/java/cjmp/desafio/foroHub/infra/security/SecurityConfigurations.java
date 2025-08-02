@@ -28,11 +28,14 @@ public class SecurityConfigurations {
                 .authorizeHttpRequests((authorizeHttpRequest) ->
                         authorizeHttpRequest
                                 .requestMatchers(HttpMethod.POST,"/login").permitAll()
+                                .requestMatchers(HttpMethod.POST, "/cursos").permitAll()
+                                .requestMatchers(HttpMethod.POST, "/respuestas").permitAll()
                                 .requestMatchers(HttpMethod.GET,"/usuarios").permitAll()
                                 .requestMatchers(HttpMethod.GET,"/perfiles").permitAll()
                                 .requestMatchers(HttpMethod.GET,"/topicos/**").permitAll()
                                 .requestMatchers(HttpMethod.PUT, "/topicos/**").permitAll()
-                                .requestMatchers(HttpMethod.POST, "/cursos").permitAll()
+                                .requestMatchers(HttpMethod.PUT, "/respuestas/**").permitAll()
+
                                 .requestMatchers("/v3/api-docs/**", "swagger-ui.html", "swagger-ui/**").permitAll()
 
 //                                .requestMatchers(HttpMethod.GET, "/usuarios/**").hasAnyRole("ADMIN", "USUARIO","INVITADO")

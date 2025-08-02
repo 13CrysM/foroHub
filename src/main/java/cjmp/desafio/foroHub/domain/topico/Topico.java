@@ -63,14 +63,14 @@ public class Topico {
         }
     }
 
-    public void agregarRespuesta(DatosRegistroRespuesta datos, Usuario autor) {
-        Respuesta respuesta = new Respuesta();
-        respuesta.setMensaje(datos.mensaje());
-        respuesta.setFechaCreacion(LocalDateTime.now());
-        respuesta.setUsuario(autor);
-        respuesta.setTopico(this);
-
-        this.respuestas.add(respuesta);
-    }
+//    public void agregarRespuesta(DatosRegistroRespuesta datos, Usuario autor) {
+//        Respuesta respuesta = new Respuesta();
+//        respuesta.setMensaje(datos.mensaje());
+//        respuesta.setTopico(this);
+//        respuesta.setUsuario(autor);
+//        respuesta.setFechaCreacion(LocalDateTime.now());
+//        respuesta.setSolucion(false);
+//        this.respuestas.add(respuesta);
+//    }
 
 }

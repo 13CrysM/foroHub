@@ -27,11 +27,13 @@ public class Respuesta {
     @JoinColumn(name = "topico_id")
     private Topico topico;
 
+    @Column(name = "fecha")
     private LocalDateTime fechaCreacion;
 
     @ManyToOne
     @JoinColumn(name = "usuario_id")
     private Usuario usuario;
+    @Column(name = "activo")
     private Boolean solucion = false;
 
     public void marcarComoSolucion() {

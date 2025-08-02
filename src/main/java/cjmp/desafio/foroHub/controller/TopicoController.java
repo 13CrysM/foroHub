@@ -116,15 +116,15 @@ public class TopicoController {
 
     }
 
-    @PostMapping("/respuesta")
-    @Transactional
-    public ResponseEntity<String> registrarRespuesta(@RequestBody @Valid DatosRegistroRespuesta datos) {
-        Topico topico = topicoRepository.getReferenceById(datos.topico_id());
-        Usuario autor = usuarioRepository.getReferenceById(datos.usuario_id());
-
-        topico.agregarRespuesta(datos, autor);
-
-        return ResponseEntity.ok("Respuesta registrada correctamente.");
-    }
+//    @PostMapping("/respuesta")
+//    @Transactional
+//    public ResponseEntity<String> registrarRespuesta(@RequestBody @Valid DatosRegistroRespuesta datos) {
+//        Topico topico = topicoRepository.getReferenceById(datos.topico_id());
+//        Usuario autor = usuarioRepository.getReferenceById(datos.usuario_id());
+//
+//        topico.agregarRespuesta(datos, autor);
+//
+//        return ResponseEntity.ok("Respuesta registrada correctamente.");
+//    }
 
 }
