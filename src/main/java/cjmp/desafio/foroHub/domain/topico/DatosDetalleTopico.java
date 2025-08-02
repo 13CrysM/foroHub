@@ -2,8 +2,8 @@ package cjmp.desafio.foroHub.domain.topico;
 
 import java.time.LocalDateTime;
 
-public record DatosListadoTopico(
-        Long id,
+public record DatosDetalleTopico(
+        long id,
         String titulo,
         String mensaje,
         LocalDateTime fechaCreacion,
@@ -11,7 +11,7 @@ public record DatosListadoTopico(
         String usuario,
         String curso
 ) {
-    public DatosListadoTopico(Topico topico) {
+    public DatosDetalleTopico(Topico topico){
         this(
                 topico.getId(),
                 topico.getTitulo(),

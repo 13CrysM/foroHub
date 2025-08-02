@@ -13,8 +13,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
@@ -82,14 +84,28 @@ public class TopicoController {
         return ResponseEntity.ok(topicos.map(DatosListadoTopico::new));
     }
 
-
-    @PutMapping
-    @Transactional
-    public ResponseEntity actualizarTopico(@RequestBody @Valid DatosActualizarTopico datosActualizarTopico) {
-        Topico topico = topicoRepository.getReferenceById(datosActualizarTopico.id());
-        topico.actualizarDatos(datosActualizarTopico);
-        return ResponseEntity.ok(new DatosRespuestaTopico(topico.getId(), topico.getTitulo(), topico.getMensaje(), topico.getFechaCreacion(),topico.getActivo()));
+    @GetMapping("/{id}")
+    public ResponseEntity<DatosDetalleTopico> detallarTopico(@PathVariable Long id){
+        var topico = topicoRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Tópico no se encuentra"));
+        return ResponseEntity.ok(new DatosDetalleTopico(topico));
     }
+
+
+    @PutMapping("/{id}")
+    @Transactional
+    public ResponseEntity actualizarTopico(@PathVariable Long id, @RequestBody @Valid DatosActualizarTopico datosActualizarTopico) {
+        var topicoBuscado = topicoRepository.findById(id);
+        if (topicoBuscado.isEmpty()){
+            return ResponseEntity.notFound().build();
+        }
+        var topico = topicoBuscado.get();
+        topico.actualizarDatos(datosActualizarTopico);
+        var respuesta =  new DatosRespuestaTopico(
+                topico.getId(), topico.getTitulo(), topico.getMensaje(), topico.getFechaCreacion(), topico.getActivo());
+        return ResponseEntity.ok(respuesta);
+        }
+
     // DELETE LOGICO
     @DeleteMapping("/{id}")
     @Transactional
