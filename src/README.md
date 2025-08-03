@@ -135,7 +135,7 @@ Puedes usar herramientas como Postman, Insomnia o curl para probar los endpoints
 - Documentación con Swagger/OpenAPI
 ---
 ## 📄 Licencia
-Este proyecto está bajo la licencia MIT. Puedes utilizarlo y modificarlo libremente.
+Puedes utilizarlo y modificarlo libremente.
 ---
 ## 🤝 Autor
 - ✍️ Crystian Muro **Desarrollador Java | Backend Developer**
