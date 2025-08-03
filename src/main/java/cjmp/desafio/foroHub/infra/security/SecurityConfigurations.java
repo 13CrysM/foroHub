@@ -35,31 +35,9 @@ public class SecurityConfigurations {
                                 .requestMatchers(HttpMethod.GET,"/topicos/**").permitAll()
                                 .requestMatchers(HttpMethod.PUT, "/topicos/**").permitAll()
                                 .requestMatchers(HttpMethod.PUT, "/respuestas/**").permitAll()
-
                                 .requestMatchers("/v3/api-docs/**", "swagger-ui.html", "swagger-ui/**").permitAll()
 
-//                                .requestMatchers(HttpMethod.GET, "/usuarios/**").hasAnyRole("ADMIN", "USUARIO","INVITADO")
-//                                .requestMatchers(HttpMethod.POST, "/usuarios/**").hasRole("ADMIN")
-//                                .requestMatchers(HttpMethod.PUT, "/usuarios/**").hasAnyRole("ADMIN","USUARIO")
-//                                .requestMatchers(HttpMethod.DELETE, "/usuarios/**").hasRole("ADMIN")
-//
-//                                .requestMatchers(HttpMethod.GET, "/perfiles/**").hasAnyRole("ADMIN", "USUARIO","INVITADO")
-//                                .requestMatchers(HttpMethod.POST, "/perfiles/**").hasRole("ADMIN")
-//                                .requestMatchers(HttpMethod.PUT, "/perfiles/**").hasAnyRole("ADMIN","USUARIO")
-//                                .requestMatchers(HttpMethod.DELETE, "/perfiles/**").hasRole("ADMIN")
-//
-//                                .requestMatchers(HttpMethod.GET, "/topicos/**").hasAnyRole("ADMIN", "USUARIO","INVITADO")
-//                                .requestMatchers(HttpMethod.POST, "/topicos/**").hasRole("ADMIN")
-//                                .requestMatchers(HttpMethod.PUT, "/topicos/**").hasAnyRole("ADMIN","USUARIO")
-//                                .requestMatchers(HttpMethod.DELETE, "/topicos/**").hasRole("ADMIN")
-//
-//                                .requestMatchers(HttpMethod.GET, "/respuestas/**").hasAnyRole("ADMIN", "USUARIO","INVITADO")
-//                                .requestMatchers(HttpMethod.POST, "/respuestas/**").hasRole("ADMIN")
-//                                .requestMatchers(HttpMethod.PUT, "/respuestas/**").hasAnyRole("ADMIN","USUARIO")
-//                                .requestMatchers(HttpMethod.DELETE, "/respuestas/**").hasRole("ADMIN")
-
-                                .anyRequest()
-                                .authenticated()
+                                .anyRequest().authenticated()
                 )
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
@@ -117,5 +95,25 @@ public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws
         .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
         .build();
 }
+
+//                                .requestMatchers(HttpMethod.GET, "/usuarios/**").hasAnyRole("ADMIN", "USUARIO","INVITADO")
+//                                .requestMatchers(HttpMethod.POST, "/usuarios/**").hasRole("ADMIN")
+//                                .requestMatchers(HttpMethod.PUT, "/usuarios/**").hasAnyRole("ADMIN","USUARIO")
+//                                .requestMatchers(HttpMethod.DELETE, "/usuarios/**").hasRole("ADMIN")
+//
+//                                .requestMatchers(HttpMethod.GET, "/perfiles/**").hasAnyRole("ADMIN", "USUARIO","INVITADO")
+//                                .requestMatchers(HttpMethod.POST, "/perfiles/**").hasRole("ADMIN")
+//                                .requestMatchers(HttpMethod.PUT, "/perfiles/**").hasAnyRole("ADMIN","USUARIO")
+//                                .requestMatchers(HttpMethod.DELETE, "/perfiles/**").hasRole("ADMIN")
+//
+//                                .requestMatchers(HttpMethod.GET, "/topicos/**").hasAnyRole("ADMIN", "USUARIO","INVITADO")
+//                                .requestMatchers(HttpMethod.POST, "/topicos/**").hasRole("ADMIN")
+//                                .requestMatchers(HttpMethod.PUT, "/topicos/**").hasAnyRole("ADMIN","USUARIO")
+//                                .requestMatchers(HttpMethod.DELETE, "/topicos/**").hasRole("ADMIN")
+//
+//                                .requestMatchers(HttpMethod.GET, "/respuestas/**").hasAnyRole("ADMIN", "USUARIO","INVITADO")
+//                                .requestMatchers(HttpMethod.POST, "/respuestas/**").hasRole("ADMIN")
+//                                .requestMatchers(HttpMethod.PUT, "/respuestas/**").hasAnyRole("ADMIN","USUARIO")
+//                                .requestMatchers(HttpMethod.DELETE, "/respuestas/**").hasRole("ADMIN")
 
 */

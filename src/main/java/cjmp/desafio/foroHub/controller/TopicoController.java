@@ -106,7 +106,7 @@ public class TopicoController {
         return ResponseEntity.ok(respuesta);
         }
 
-    // DELETE LOGICO
+    // DELETE LÓGICO
     @DeleteMapping("/{id}")
     @Transactional
     public ResponseEntity eliminarMedico(@PathVariable Long id) {
