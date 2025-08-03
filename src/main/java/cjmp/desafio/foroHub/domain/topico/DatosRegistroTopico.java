@@ -4,6 +4,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public record DatosRegistroTopico(
 
@@ -12,8 +13,12 @@ public record DatosRegistroTopico(
         @NotBlank
         String mensaje,
         @NotNull
-        LocalDate fecha_creacion,
+        LocalDateTime fechaCreacion,
         @NotNull
-        Boolean activo
+        Boolean activo,
+        @NotNull
+        Long usuario_id,
+        @NotNull
+        Long curso_id
 ) {
 }
